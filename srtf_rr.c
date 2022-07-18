@@ -19,7 +19,7 @@ int main()
             printf("Enter the number of Processes : ");
             scanf("%d", &n);
             printf("\nEnter the burst time for the sequence\n");
-            for (i = 0; i<n; i++)
+            for (i = 0; i < n; i++)
             {
                 scanf("%d", &bt[i]);
                 st[i] = bt[i];
@@ -65,7 +65,7 @@ void rr(int n, int tq, int st[], int bt[])
             sq = sq + temp1;
             tat[i] = sq;
         }
-        if (n==count)
+        if (n == count)
             break;
     }
     for (i = 0; i < n; i++)
@@ -74,8 +74,8 @@ void rr(int n, int tq, int st[], int bt[])
         swt += wt[i];
         stat += tat[i];
     }
-    awt = (float)swt /n;
-    atat = (float)stat /n;
+    awt = (float)swt / n;
+    atat = (float)stat / n;
     printf("\nPROCESS\tBURST TIME\tWAITING TIME\tTURN AROUND TIME\n");
     for (i = 0; i < n; i++)
     {
@@ -86,38 +86,43 @@ void rr(int n, int tq, int st[], int bt[])
 
 void srtf()
 {
-    int at[10], bt[10], rt[10], remain = 0, time, smallest,endtime = 0, swt = 0, stat = 0,j, i, n;
+    int at[10], bt[10], rt[10], remain = 0, time, smallest, endtime = 0, swt = 0, stat = 0, j, i, n;
     printf("\nEnter the number of processes : ");
     scanf("%d", &n);
-    for (i = 0; i < n; i++){
-        printf("\nEnter arrival time for P%d    : ",i+1);
-        scanf("%d",&at[i]);
-        printf("\nEnter burst time for P%d      : ",i+1);
-        scanf("%d",&bt[i]);
-        rt[i]=bt[i];
+    for (i = 0; i < n; i++)
+    {
+        printf("\nEnter arrival time for P%d    : ", i + 1);
+        scanf("%d", &at[i]);
+        printf("\nEnter burst time for P%d      : ", i + 1);
+        scanf("%d", &bt[i]);
+        rt[i] = bt[i];
     }
 
-    rt[100]=9999;
+    rt[100] = 9999;
     printf("\nPROCESS\tWAITING TIME\tTURN AROUND TIME\n");
-    for(time=0;remain!=n;time++){
+    for (time = 0; remain != n; time++)
+    {
         smallest = 100;
-        for(i=0;i<n;i++){
-            if(at[i]<=time && rt[i]<rt[smallest] && rt[i]>0){
+        for (i = 0; i < n; i++)
+        {
+            if (at[i] <= time && rt[i] < rt[smallest] && rt[i] > 0)
+            {
                 smallest = i;
             }
         }
         rt[smallest]--;
-        if(rt[smallest]==0){
+        if (rt[smallest] == 0)
+        {
             remain++;
-            endtime = time +1;
+            endtime = time + 1;
             j = smallest;
-            printf("%d\t%d\t\t%d\n",smallest+1,endtime-bt[j]-at[j],endtime-at[j]);
-            swt += endtime -bt[j] - at[j];
+            printf("%d\t%d\t\t%d\n", smallest + 1, endtime - bt[j] - at[j], endtime - at[j]);
+            swt += endtime - bt[j] - at[j];
             stat += endtime - at[j];
         }
     }
-    float atat=0.0,awt=0.0;
-    awt = (float)swt/n;
-    atat = (float)stat/n;
-    printf("\nAVERAGE WAITING TIME=%f\nAVERAGE TURN AROUND TIME=%f",awt,atat);
+    float atat = 0.0, awt = 0.0;
+    awt = (float)swt / n;
+    atat = (float)stat / n;
+    printf("\nAVERAGE WAITING TIME=%f\nAVERAGE TURN AROUND TIME=%f", awt, atat);
 }
